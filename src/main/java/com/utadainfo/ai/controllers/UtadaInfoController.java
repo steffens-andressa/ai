@@ -25,21 +25,21 @@ public class UtadaInfoController {
 
     @Operation(summary = "Provides a summary about Utada Hikaru")
     @GetMapping("/about")
-    public String aboutChat(@RequestParam (value = "message",
+    public String about(@RequestParam (value = "message",
             defaultValue = "Send a brief description about Utada Hikaru and the official website") String message){
         return chatClient.call(message);
     }
 
     @Operation(summary = "Lists the best selling albums")
     @GetMapping("/top-albums")
-    public ChatResponse topAlbumsChat(@RequestParam (value = "message",
+    public ChatResponse topAlbums(@RequestParam (value = "message",
             defaultValue = "What are the best selling albums from Utada Hikaru?") String message){
         return chatClient.call(new Prompt(message));
     }
 
     @Operation(summary = "Provides a summary about a single or album")
     @GetMapping("/title-info")
-    public String titleInfoChat(@Parameter (schema = @Schema(allowableValues = {"Single", "Album"})) String type,
+    public String titleInfo(@Parameter (schema = @Schema(allowableValues = {"Single", "Album"})) String type,
                                 @RequestParam (value = "title", defaultValue = "First Love") String title) {
         PromptTemplate promptTemplate = new PromptTemplate("""
                 Send me a brief summary about the {type} {title} from Utada Hikaru and list all the tracks.
@@ -51,7 +51,7 @@ public class UtadaInfoController {
 
     @Operation(summary = "Translates a track")
     @GetMapping("/track-translation")
-    public String translateTrackChat(@RequestParam (value = "track", defaultValue = "First Love") String track) {
+    public String translateTrack(@RequestParam (value = "track", defaultValue = "First Love") String track) {
         PromptTemplate promptTemplate = new PromptTemplate("""
                 Send the lyrics in romaji and translate this track {track} from Utada Hikaru
                 """);
